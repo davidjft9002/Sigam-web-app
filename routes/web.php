@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MaterialController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -22,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('materiales', MaterialController::class)
     ->parameters(['materiales' => 'material'])
     ->except(['show']);
+
+    Route::resource('clientes', ClienteController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';
