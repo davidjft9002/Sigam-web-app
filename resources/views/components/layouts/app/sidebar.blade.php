@@ -12,28 +12,22 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Platform" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
+                <flux:navlist.group heading="Dashboard" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Panel Principal</flux:navlist.item>
                 </flux:navlist.group>
-                    <flux:navlist.group heading="Comercial" class="grid">
-                    <flux:navlist.item icon="users" :href="route('clientes.index')" :current="request()->routeIs('clientes.*')" wire:navigate>Clientes</flux:navlist.item>
+
+                <flux:navlist.group heading="Modulo comerical" class="grid">
+                    <div x-data="{ abierto: {{ request()->routeIs('clientes.*') ? 'true' : 'false' }} }">
+                        <flux:navlist.item icon="clipboard-document-list" x-on:click="abierto = ! abierto" :current="request()->routeIs('clientes.*')">Gestion comercial</flux:navlist.item>
+                        <div x-show="abierto" x-collapse class="ps-7">
+                            <flux:navlist.item icon="user" :href="route('clientes.index')" :current="request()->routeIs('clientes.*')" wire:navigate>Clientes</flux:navlist.item>
+                        </div>
+                    </div>
                 </flux:navlist.group>
-                <flux:navlist.group heading="Inventario" class="grid">
-                    <flux:navlist.item icon="cube" :href="route('materiales.index')" :current="request()->routeIs('materiales.*')" wire:navigate>Materiales</flux:navlist.item>
-                </flux:navlist.group>
+
             </flux:navlist>
 
             <flux:spacer />
-
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    Repository
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                    Documentation
-                </flux:navlist.item>
-            </flux:navlist>
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
